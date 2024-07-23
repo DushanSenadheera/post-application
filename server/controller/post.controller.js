@@ -27,6 +27,11 @@ exports.getPostById = async (req, res) => {
 
     try {
         const Post = await PostModel.findOne({title: title});
+
+        if (!Post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
         res.status(200).json({ Post });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -39,7 +44,7 @@ exports.addComment = async (req, res) => {
     
         try {
             const Post = await PostModel.findOne({title: title});
-            const comment = { text: commentText };
+            const comment = { comment: commentText };
             Post.comments.push(comment);
             await Post.save();
             res.status(200).json({ Post, message: "Comment added successfully" });
