@@ -33,4 +33,19 @@ exports.getPostById = async (req, res) => {
     }
 }
 
+exports.addComment = async (req, res) => {
+    
+        const { title, commentText } = req.body;
+    
+        try {
+            const Post = await PostModel.findOne({title: title});
+            const comment = { text: commentText };
+            Post.comments.push(comment);
+            await Post.save();
+            res.status(200).json({ Post, message: "Comment added successfully" });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+}
+
 

@@ -5,6 +5,7 @@ import styles from './CommentPost.module.scss'
 
 const CommentPost = ({ title, description, comments, titleColor }) => {
 
+  const [comment, setComment] = useState()
   const [post, setPost] = useState()
 
   useEffect(() => {
@@ -19,14 +20,32 @@ const CommentPost = ({ title, description, comments, titleColor }) => {
       })
   }, [])
 
+  const handleCommentSubmit = () => {
+    axios.post("http://localhost:5000/addComment", {
+      postTitle: post.title,
+      comment: comment
+    })
+      .then((res) => {
+        console.log(res.data)
+        setComment(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+        alert(`${err}`)
+      })
+  }
+
   return (
     <div className={styles.commentPost}>
       <Post color={titleColor} title={title} description={description} comments={comments}/>
       <div className="comments">
-        <p>comments</p>
+        {/* {comments.map((comment) => {
+          return <p>{comment}</p>
+        })} */}
+        <p>Comments</p>
       </div>
-      <input type="text" placeholder="New Comment Text" />
-      <button className="primary-btn">Comment</button>
+      <input value={comment} onChange={(e) => setComment(e.target.value)} type="text" placeholder="New Comment Text" />
+      <button onClick={handleCommentSubmit} className="primary-btn">Comment</button>
     </div>
   )
 }
