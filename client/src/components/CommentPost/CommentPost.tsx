@@ -11,8 +11,8 @@ const CommentPost = ({ title, description, comments, titleColor }) => {
     axios
       .post("http://localhost:5000/getPostById", { title: title })
       .then((res) => {
-        console.log(res.data);
-        setPost(res.data);
+        console.log(res.data.Post);
+        setPost(res.data.Post);
       })
       .catch((err) => {
         console.log(err);
@@ -47,8 +47,10 @@ const CommentPost = ({ title, description, comments, titleColor }) => {
       />
       <div className="comments">
         {
-          selectedPost?.comments?.map((commentItem, index) => (
-            <p key={index}>{commentItem}</p>
+          selectedPost?.comments.map((comment, index) => (
+            <div key={index}>
+              <p>{comment.comment}</p>
+            </div>
           ))
         }
       </div>

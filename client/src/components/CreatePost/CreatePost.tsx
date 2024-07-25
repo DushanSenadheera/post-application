@@ -9,7 +9,16 @@ const CreatePost = () => {
     titleColor: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+
+    setPost( prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     axios
       .post("http://localhost:5000/createPost", post)
@@ -27,15 +36,17 @@ const CreatePost = () => {
     <form className={styles.createPost}>
       <input
         type="text"
+        name="title"
         placeholder="Title"
         value={post.title}
-        onChange={(e) => setPost({ ...post, title: e.target.value })}
+        onChange={handleChange}
       />
       <input
         type="text"
+        name="description"
         placeholder="Description"
         value={post.description}
-        onChange={(e) => setPost({ ...post, description: e.target.value })}
+        onChange={handleChange}
       />
       <div className="color">
         <p>Title Color</p>

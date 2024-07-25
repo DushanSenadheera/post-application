@@ -43,6 +43,7 @@ const Home = () => {
             title={postItem.title}
             description={postItem.description}
             color={postItem.titleColor}
+            comments={postItem.comments}
           />
         );
       })}
