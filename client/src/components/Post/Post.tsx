@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from '@mui/material/Modal';
+import {StyledModal} from '../../styledComponent' 
 import styles from './Post.module.scss'
 import CommentPost from "../CommentPost/CommentPost";
 
@@ -15,8 +15,8 @@ const Post = (props) => {
       <div className={styles.post}>
         <h3 style={{color: props.color}} onClick={handleOpen}>{props.title}</h3>
         <p>{props.description}</p>
-        <small>{totalComments} Comments</small>
-        <Modal
+        <small className={styles.commentSection} >{totalComments} Comments</small>
+        <StyledModal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -28,7 +28,7 @@ const Post = (props) => {
         comments={props.comments}
         titleColor={props.color}
       />
-      </Modal>
+      </StyledModal>
       </div>
   )
 }

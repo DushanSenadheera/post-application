@@ -39,6 +39,7 @@ const CommentPost = ({ title, description, comments, titleColor }) => {
 
   return (
     <div className={styles.commentPost}>
+      <h1>{title}</h1>
       <Post
         color={titleColor}
         title={title}

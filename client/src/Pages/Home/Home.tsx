@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Styles from "./Home.module.scss";
 import Post from "../../components/Post/Post";
-import Modal from "@mui/material/Modal";
+import { StyledModal } from "../../styledComponent";
 import CreatePost from "../../components/CreatePost/CreatePost";
 
 const Home = () => {
@@ -29,14 +29,14 @@ const Home = () => {
       <button className="primary-btn" onClick={handleOpen}>
         Create New Post
       </button>
-      <Modal
+      <StyledModal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <CreatePost />
-      </Modal>
+      </StyledModal>
       {post?.map((postItem) => {
         return (
           <Post
